@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+<TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tituloPrincipal"
+    android:textSize="20sp"
+  	android:layout_gravity="center"
+  	android:layout_marginTop="20dp"/>
+
+
+<TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tituloUsuario"
+    android:textSize="15sp"
+    android:layout_gravity="center"
+    android:layout_marginTop="35dp"/>
+
+
+<EditText 
+    android:id="@+id/campoUser"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="@string/campoUsuario"
+    android:inputType="text"
+    android:layout_gravity="center"/>
+
+
+<TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tituloPassword"
+    android:textSize="15sp"
+    android:layout_gravity="center"
+    android:layout_marginTop="20dp"/>
+
+<EditText
+    android:id="@+id/campoPassword"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="textPassword"
+    android:layout_gravity="center"
+    android:hint="@string/campoPassword"/>
+
+
+<LinearLayout 
+    android:layout_marginTop="50dp"  
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+
+
+<Button 
+    android:id="@+id/botonInicioSesion"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:text="@string/botonInicioSesion"
+    android:layout_marginLeft="35dp"/>
+
+
+<Button 
+    android:id="@+id/botonRegistrarse"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:text="@string/botonNuevoRegistro"/>
+
+</LinearLayout>
+
+</LinearLayout>

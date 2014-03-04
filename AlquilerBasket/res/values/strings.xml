@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EjemploFruteria</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="tituloPrincipal"> Inicio de Sesión </string>
+    <string name="campoUsuario"> Introduce aquí el nombre de usuario </string>
+    <string name="campoPassword"> Introduce aquí la contraseña </string>
+    <string name="tituloUsuario"> Usuario: </string>
+    <string name="tituloPassword"> Contraseña: </string>
+    
+    <string name="botonInicioSesion"> Iniciar Sesion </string>
+    <string name="botonNuevoRegistro"> Registrarse </string>
+
+</resources>
