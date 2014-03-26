@@ -1,0 +1,130 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/fondo_login"
+    android:orientation="vertical"
+    tools:context="com.example.alquilerBasket.PantallaNuevoUsuario" >
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="200dip"
+        android:layout_height="3dip"
+        android:layout_alignLeft="@+id/layoutBlanco"
+        android:layout_alignRight="@+id/layoutBlanco"
+        android:layout_below="@+id/layoutBlanco"
+        android:background="@drawable/drop_shadow" />
+
+    <LinearLayout
+        android:id="@+id/layoutBlanco"
+        android:layout_width="250dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dip"
+            android:text="@string/nameLabel" />
+
+        <EditText
+            android:id="@+id/RegCampoNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dip"
+            android:inputType="text"
+            android:width="120dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dip"
+            android:text="@string/dniLabel" />
+
+        <EditText
+            android:id="@+id/RegCampoDni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dip"
+            android:inputType="text"
+            android:maxLength="9"
+            android:width="120dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dip"
+            android:text="@string/emailLabel" />
+
+        <EditText
+            android:id="@+id/RegCampoEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dip"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/black"
+            android:width="120dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dip"
+            android:text="@string/passLabel" />
+
+        <EditText
+            android:id="@+id/RegCampoPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dip"
+            android:inputType="textPassword"
+            android:width="120dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dip"
+            android:text="@string/passLabel2" />
+
+        <EditText
+            android:id="@+id/RegCampoPassword2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dip"
+            android:inputType="textPassword"
+            android:width="120dp"
+            android:layout_marginBottom="15dip"/>
+    </LinearLayout>
+    
+    
+    <Button
+        android:id="@+id/botonValidarNuevoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/view1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="14dp" 
+        android:text="@string/botonRegistrar"/>
+
+    <Button
+        android:id="@+id/botonCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/botonValidarNuevoUsuario"
+        android:layout_alignRight="@+id/view1"
+        android:text="@string/botonCancelar"/>
+
+</RelativeLayout>

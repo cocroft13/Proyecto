@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -15,38 +14,35 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegisterUser {
-		
+public class LoginUser {
+	
 	private String URL;
 	private Boolean valido = false;
-		
-	public void postData(String nombre,String dni,String email,String password,String rePassword){
-		
-		URL = "http://192.168.1.13/login.php";
+	
+	public void postData(String user,String pass) {
+		URL = "http://192.168.1.13/login2.php";
 		String code = "1";
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(URL);
 		
 		JSONObject jsonObj = new JSONObject();
-		
+				
 		try {
 			
 			//Datos Json
-			jsonObj.put("Nombre", nombre);
-			jsonObj.put("DNI", dni);
-			jsonObj.put("Email", email);
-			jsonObj.put("Pass", password);
-			jsonObj.put("RePass", rePassword);
+			jsonObj.put("Nombre",user);
+			jsonObj.put("Password", pass);
+			
 						
 			JSONArray jsonArray = new JSONArray();
 			jsonArray.put(jsonObj);
-						
-			//Post
+			
+			//Post the data
 			httpPost.setHeader("json",jsonObj.toString());
 			httpPost.getParams().setParameter("postJson", jsonArray);
 			
-			//Ejecución de petición de respuesta
+			//Ejecución de petición
 			HttpResponse httpResponse = httpClient.execute(httpPost);			
 			
 			HttpEntity entity = httpResponse.getEntity();
@@ -55,25 +51,24 @@ public class RegisterUser {
 			
 			// De aquí obtenemos los datos del fichero php
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inStream,"iso-8859-1"),8);
-								
+					
 			String line = reader.readLine();	
-							
+				
 			inStream.close();
-			reader.close();
-			
-			//SI DEVUELVE 1(code), EL USUARIO SE HA PODIDO CREAR PORQUE NO EXISTIA ANTERIORMENTE.
+			reader.close();		
+						
+			//SI VALE UNO EL USUARIO EXISTE Y SE PUEDE PASAR A LA OTRA PANTALLA.
 			if(line.equals(code)){	
 				
 				valido = true;
-				
-			//SI NO, EL USUARIO YA EXISTE CON ESE DNI, ASI QUE DEBE LOGUEARSE CORRECTAMENTE.
+	
+			//SI NO, EL USUARIO NO COINCIDE CON NINGUNO EN LA BD, POR LO QUE DEBE CREAR UNO.
 			} else {
 				
 				valido = false;		
 			}			
 			validOrNot();
-		
-		
+										
 		} catch (JSONException e) {			
 			e.printStackTrace();
 			
@@ -82,11 +77,12 @@ public class RegisterUser {
 						
 		} catch (IOException e) {						
 			e.printStackTrace();
-		}						
+		}				
 	}
-				
-public Boolean validOrNot(){
+		
+	
+	public Boolean validOrNot(){
 		
 		return valido;			
-	}
+	}		
 }

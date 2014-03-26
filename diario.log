@@ -1,0 +1,23 @@
+---------------
+(26/03/2014)
+(Realizado hasta hoy)
+(18 Horas aprox.)
+
+-Se ha desarrollado la parte del proyecto relacionada con el inicio de sesión y registro de usuarios, a falta de mejoras, tanto la parte Java como la de PHP. Se ha utilizado JSON para codificar y decodificar los datos de envío y recibo de información entre ambas partes.
+
+-Para su desarrollo, se ha utilizado documentación de la web de PHP, del API de Android y Java, asi como webs,blogs,etc para ver casos prácticos.
+
+-Se han incluido los ficheros PHP al repositorio, así como este documento.
+
+* Referencias:
+	
+	http://es1.php.net/manual/es/book.json.php (Desde aqui en adelante, hay varias secciones)
+	http://developer.android.com/intl/es/reference/org/apache/http/client/methods/HttpPost.html
+	http://developer.android.com/intl/es/reference/org/apache/http/HttpResponse.html
+	http://blog.ruido4design.com/2012/03/validar-un-nif-en-java.html
+	Diferentes paginas de http://stackoverflow.com en referencia a estas clases y sus usos.
+*
+---------------
+
+
+	
