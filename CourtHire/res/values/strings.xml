@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Court-Hire</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Pantalla Principal -->
+
+    <string name="tituloPrincipal"> Inicio de Sesión </string>
+    <string name="campoUsuario"> Introduce aquí el nombre de usuario </string>
+    <string name="campoPassword"> Introduce aquí la contraseña </string>
+    <string name="tituloUsuario"> Usuario: </string>
+    <string name="tituloPassword"> Contraseña: </string>
+    <string name="botonInicioSesion"> Iniciar Sesion </string>
+    <string name="botonNuevoRegistro"> Registrarse </string>
+
+    <!-- Fin Pantalla Principal -->
+
+
+    <!-- Pantalla de registro de usuarios -->
+
+    <string name="nameLabel"> Elija un nombre de usuario </string>
+    <string name="dniLabel"> Introduzca su DNI </string>
+    <string name="emailLabel"> Introduzca su dirección de email </string>
+    <string name="passLabel"> Introduzca una clave para su sesión </string>
+    <string name="passLabel2"> Repita la clave de sesión </string>
+    <string name="botonRegistrar"> Registrar </string>
+    <string name="botonCancelar"> Cancelar </string>
+
+    <!-- Fin pantalla registro de usuarios -->
+
+
+    <!-- Pantalla de visualizacion de pistas (PantallaPrincipal) -->
+    <string name="action_search"> Buscar </string>
+    <string name="action_location_found"> Localizacion </string>
+    <string name="action_refresh"> Recargar </string>
+    <string name="action_help"> Ayuda </string>
+    <string name="action_check_updates"> Actualizaciones </string>
+
+    <string-array name="lista_dias">
+        <item> Lunes </item>
+        <item> Martes </item>
+        <item> Miércoles </item>
+        <item> Jueves </item>
+        <item> Viernes </item>
+        <item> Sábado </item>
+        <item> Domingo </item>
+    </string-array>
+
+    <string name="title_activity_pantalla_principal">PantallaPrincipal</string>
+    <string name="refreshAction"> Recargar </string>
+    <string name="botonVerPistas"> Consultar </string>
+
+    <!-- Fin Pantalla Principal -->
+
+    <string name="title_activity_pantalla_pistas">PantallaPistas</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_pantalla_nuevo_usuario">PantallaNuevoUsuario</string>
+
+</resources>
