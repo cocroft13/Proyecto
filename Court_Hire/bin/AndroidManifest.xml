@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fernando.court_hire"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+    
+    <permission
+        android:name="android.permission.USER"
+        android:permissionGroup="android.permission-group.NETWORK"
+        android:protectionLevel="normal" >
+    </permission>
+    
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/balon_icono"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="fernando.court_hire.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="fernando.court_hire.PantallaNuevoUsuario"></activity>
+        <activity android:name="fernando.court_hire.PantallaPistas"></activity>
+        
+        
+        
+        
+        
+    </application>
+
+</manifest>
