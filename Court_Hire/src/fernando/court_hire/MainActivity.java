@@ -1,13 +1,14 @@
 package fernando.court_hire;
 
-
-
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +19,14 @@ import android.widget.Toast;
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
 	
+	
+	private ProgressDialog pDialog;
 	private EditText campoUser;
 	private EditText campoPassword;
 	private Button validar;
 	private Button registrarse;
-	private LoginUser loginUser;
-				
+	private LoginUser loginUser;	
+	private Thread thr1;
 	
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
@@ -41,23 +44,37 @@ public class MainActivity extends Activity {
 		campoPassword = (EditText)findViewById(R.id.campoPassword);
 		validar = (Button)findViewById(R.id.botonInicioSesion);
 		registrarse = (Button)findViewById(R.id.botonRegistrarse);
+		pDialog = new ProgressDialog(getApplicationContext());
+		
 		
 		validar.setOnClickListener(new View.OnClickListener() {
+	
 			
 			@Override
 			public void onClick(View v) {
-									
-				String userName = campoUser.getText().toString();
-				String userPass = campoPassword.getText().toString();
-				
+											
+										
+				final String userName = campoUser.getText().toString();
+				final String userPass = campoPassword.getText().toString();
+							
 				if(userName.equalsIgnoreCase("") || userPass.equalsIgnoreCase("")){
 					
 					Toast.makeText(getApplicationContext(), "Alguno de los campos están vacíos", Toast.LENGTH_SHORT).show();			
 				
 				} else {
+															
+					try {	
+						
+						thr1 = new Thread(new Runnable() {
+							public void run() {
 											
-					try {							
+						
 						loginUser.postData(userName, userPass);
+						
+							}
+						}); thr1.start();
+						
+						
 						Boolean valido = loginUser.validOrNot();
 												
 						//SI ES CORRECTO, IREMOS A LA PANTALLA DONDE VER LAS PISTAS LIBRES, OCUPADAS, ETC
@@ -72,15 +89,16 @@ public class MainActivity extends Activity {
 						} else {						
 							Toast.makeText(getApplicationContext(), "El nombre de usuario no existe o la contraseña no es correcta, asegúrese o cree una una cuenta", Toast.LENGTH_LONG).show();						
 						}
-											
-																									
+																																				
 						} catch (Exception e) {
 							e.printStackTrace();
 					}													
 			    }
-			}
-		});		 
 			
+			}
+		});		
+											
+				
 		registrarse.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -92,8 +110,7 @@ public class MainActivity extends Activity {
 						
 			}
 		});		
+				
 	}
-	
-	
-	
+		
 }

@@ -15,36 +15,43 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
 @SuppressLint("NewApi")
 public class PantallaPistas extends Activity implements ActionBar.OnNavigationListener {
 	
+	Spinner spinnerDias;
 	ListView list;
 	TextView nombrePista;
 	TextView reservado;
 	Button botonConsulta;
 	ArrayList<HashMap<String, String>> datosLista ;
 	
-	//URL PARA OBTENER EL ARRAY JSON
-	private static String url = "http://10.0.2.2/";
+	
+	
 	boolean flag;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pantalla_pistas);
 		
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		
+				
+		SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.lista_dias, 
+																 android.R.layout.simple_spinner_dropdown_item);
+		
+		actionBar.setListNavigationCallbacks(adapter, this);
+	
 		datosLista = new ArrayList<HashMap<String,String>>();
 		botonConsulta = (Button)findViewById(R.id.nombrePista);
 		list = (ListView)findViewById(R.id.miLista);
 		
-		
-		
-
 	}
 
 

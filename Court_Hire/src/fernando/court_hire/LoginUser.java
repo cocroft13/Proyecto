@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -14,22 +15,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.AsyncTask;
+
 public class LoginUser {
 	
 	private String URL;
 	private Boolean valido = false;
 	
 	public void postData(String user,String pass) {
-		URL = "http://192.168.1.13/login2.php";
+		URL = "http://169.254.118.110/login2.php";
 		String code = "1";
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(URL);
 		
 		JSONObject jsonObj = new JSONObject();
+		
 				
 		try {
-			
+	
 			//Datos Json
 			jsonObj.put("Nombre",user);
 			jsonObj.put("Password", pass);
@@ -79,10 +83,13 @@ public class LoginUser {
 			e.printStackTrace();
 		}				
 	}
-		
+	
 	
 	public Boolean validOrNot(){
 		
 		return valido;			
-	}		
+	}
+
+
+			
 }
