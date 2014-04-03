@@ -18,8 +18,7 @@ import android.widget.Toast;
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
-	
-	
+		
 	private ProgressDialog pDialog;
 	private EditText campoUser;
 	private EditText campoPassword;
@@ -45,8 +44,7 @@ public class MainActivity extends Activity {
 		validar = (Button)findViewById(R.id.botonInicioSesion);
 		registrarse = (Button)findViewById(R.id.botonRegistrarse);
 		pDialog = new ProgressDialog(getApplicationContext());
-		
-		
+			
 		validar.setOnClickListener(new View.OnClickListener() {
 	
 			
@@ -64,13 +62,10 @@ public class MainActivity extends Activity {
 				} else {
 															
 					try {	
-						
-																
+								
 						startDialog(userName, userPass);
-						//loginUser.postData(userName, userPass);
-						
-
-						Boolean valido = loginUser.validOrNot();
+						boolean valido = loginUser.validOrNot();
+				
 												
 						//SI ES CORRECTO, IREMOS A LA PANTALLA DONDE VER LAS PISTAS LIBRES, OCUPADAS, ETC
 						if(valido) {
@@ -101,32 +96,31 @@ public class MainActivity extends Activity {
 				
 				Intent intent = new Intent(MainActivity.this,PantallaNuevoUsuario.class);
 				startActivity(intent);
-
 						
 			}
 		});		
 				
 	}
-	
 		
 	private void startDialog(final String userName,final String pass){
-			
-		pDialog.setIcon(R.drawable.balon_icono);
+					
 		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		pDialog.setCancelable(false);
 		pDialog = ProgressDialog.show(MainActivity.this, "Login de usuario", "Verificando...");
+		
 		
 		//Lanzamos un nuevo hilo para el trabajo pesado.		
 		new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
-				
-				loginUser.postData(userName,pass);
-				pDialog.dismiss();
+							
+				loginUser.postData(userName,pass);				
 				handler.sendEmptyMessage(0);
+				pDialog.dismiss();
 			}
 		}).start();
+		
 	
 	}
 	
@@ -134,9 +128,8 @@ public class MainActivity extends Activity {
 	    @Override  
 	    public void handleMessage(Message msg) {
 	         
+	    
 	    }  
-	};
-	
-	
+	};	
 		
 }

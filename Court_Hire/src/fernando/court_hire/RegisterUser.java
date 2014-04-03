@@ -20,7 +20,7 @@ public class RegisterUser {
 	private String URL;
 	private Boolean valido = false;
 		
-	public void postData(String nombre,String dni,String email,String password,String rePassword){
+	public boolean postData(String nombre,String dni,String email,String password,String rePassword){
 		
 		URL = "http://169.254.118.110/login.php";
 		String code = "1";
@@ -71,8 +71,7 @@ public class RegisterUser {
 				
 				valido = false;		
 			}			
-			validOrNot();
-		
+	
 		
 		} catch (JSONException e) {			
 			e.printStackTrace();
@@ -82,12 +81,11 @@ public class RegisterUser {
 						
 		} catch (IOException e) {						
 			e.printStackTrace();
-		}						
+		}	
+		
+		return valido;
 	}
 				
-public Boolean validOrNot(){
-		
-		return valido;			
-	}
+
 }
 

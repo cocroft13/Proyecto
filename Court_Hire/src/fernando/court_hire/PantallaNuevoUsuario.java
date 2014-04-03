@@ -2,8 +2,12 @@ package fernando.court_hire;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +19,9 @@ public class PantallaNuevoUsuario extends Activity {
 	 private EditText campoNombre,campoDni,campoEmail,campoPassword,campoRePassword;	
 	 private Button botonRegistrar;
 	 private Button botonCancelar;
+	 private ProgressDialog pDialog;
 	
-	 private String nombre,dni,email,pass,rePass;
+	
 		
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
@@ -31,7 +36,9 @@ public class PantallaNuevoUsuario extends Activity {
 		campoRePassword = (EditText)findViewById(R.id.RegCampoPassword2);
 				
 		botonRegistrar = (Button)findViewById(R.id.botonValidarNuevoUsuario);
-		botonCancelar = (Button)findViewById(R.id.botonCancelar);						
+		botonCancelar = (Button)findViewById(R.id.botonCancelar);		
+		
+		pDialog = new ProgressDialog(getApplicationContext());
 		
 		//EVENTO DEL BOTON REGISTRAR, UNA VEZ INTRODUCIDOS LOS CAMPOS, SE COMPROBARÁN Y SI TODO ES CORRECTO
 		//SE ENVIARA LA PETICION HTTP-POST PARA INSERTAR EL NUEVO USUARIO EN LA BD.
@@ -41,11 +48,11 @@ public class PantallaNuevoUsuario extends Activity {
 			@Override
 			public void onClick(View v) {
 					
-				nombre = campoNombre.getText().toString();
-				dni = campoDni.getText().toString();
-				email = campoEmail.getText().toString();
-				pass = campoPassword.getText().toString();
-				rePass = campoRePassword.getText().toString();
+				final String nombre = campoNombre.getText().toString();
+				final String dni = campoDni.getText().toString();
+				final String email = campoEmail.getText().toString();
+				final String pass = campoPassword.getText().toString();
+				final String rePass = campoRePassword.getText().toString();
 										
 				if(nombre.equalsIgnoreCase("") || dni.equalsIgnoreCase("") || email.equalsIgnoreCase("") ||
 					pass.equalsIgnoreCase("") || rePass.equalsIgnoreCase("")){
@@ -61,8 +68,10 @@ public class PantallaNuevoUsuario extends Activity {
 					
 					try {
 					//SE HACE LA LLAMADA A POSTDATA PARA ENVIAR LOS DATOS
-					registerUser.postData(nombre, dni, email, pass, rePass);					
-					Boolean valido = registerUser.validOrNot();
+					
+					startDialog(nombre,dni,email,pass,rePass);
+					//registerUser.postData(nombre, dni, email, pass, rePass);					
+					Boolean valido = registerUser.postData(nombre, dni, email, pass, rePass);
 										
 					if(valido){
 						
@@ -95,10 +104,7 @@ public class PantallaNuevoUsuario extends Activity {
 				
 			}
 		});
-		
-		
-		
-		
+	
 	}
 		
 	//METODO PARA COMPROBAR SI EL DNI INTRODUCIDO ES UN DNI VALIDO O NO
@@ -124,8 +130,43 @@ public class PantallaNuevoUsuario extends Activity {
 				
 				valido = true;				
 			}		
-		}				
+		}	
+		
+		
 		return valido;	
 	}	
+	
+	
+	private void startDialog(final String nombre,final String dni, 
+							 final String email,final String password,
+							 final String rePassword) {
+		
+		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pDialog.setCancelable(false);
+		pDialog = ProgressDialog.show(PantallaNuevoUsuario.this, "Registro de usuario", "Verificando...");
+		
+		//SE LANZA EL NUEVO HILO
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				registerUser.postData(nombre, dni, email, password, rePassword);				
+				handler.sendEmptyMessage(0);
+				pDialog.dismiss();
+				
+			}
+		}).start();
+		
+	}
+	
+	Handler handler = new Handler(){
+		
+		@Override
+		public void handleMessage(Message msg){
+			
+		}
+	};
+		
 }
 

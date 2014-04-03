@@ -74,7 +74,7 @@ public class LoginUser {
 				
 				valido = false;		
 			}			
-			validOrNot();
+
 										
 		} catch (JSONException e) {			
 			e.printStackTrace();
@@ -84,7 +84,9 @@ public class LoginUser {
 						
 		} catch (IOException e) {						
 			e.printStackTrace();
-		}				
+		}
+		
+		
 	}
 	
 	
@@ -92,9 +94,5 @@ public class LoginUser {
 		
 		return valido;			
 	}
-	
-	
-
-
 			
 }
