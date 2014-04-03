@@ -65,16 +65,11 @@ public class MainActivity extends Activity {
 															
 					try {	
 						
-						thr1 = new Thread(new Runnable() {
-							public void run() {
-											
+																
+						startDialog(userName, userPass);
+						//loginUser.postData(userName, userPass);
 						
-						loginUser.postData(userName, userPass);
-						
-							}
-						}); thr1.start();
-						
-						
+
 						Boolean valido = loginUser.validOrNot();
 												
 						//SI ES CORRECTO, IREMOS A LA PANTALLA DONDE VER LAS PISTAS LIBRES, OCUPADAS, ETC
@@ -112,5 +107,36 @@ public class MainActivity extends Activity {
 		});		
 				
 	}
+	
+		
+	private void startDialog(final String userName,final String pass){
+			
+		pDialog.setIcon(R.drawable.balon_icono);
+		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pDialog.setCancelable(false);
+		pDialog = ProgressDialog.show(MainActivity.this, "Login de usuario", "Verificando...");
+		
+		//Lanzamos un nuevo hilo para el trabajo pesado.		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				loginUser.postData(userName,pass);
+				pDialog.dismiss();
+				handler.sendEmptyMessage(0);
+			}
+		}).start();
+	
+	}
+	
+	Handler handler = new Handler() {  
+	    @Override  
+	    public void handleMessage(Message msg) {
+	         
+	    }  
+	};
+	
+	
 		
 }
