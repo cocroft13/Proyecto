@@ -35,10 +35,7 @@
         <activity android:name="fernando.court_hire.PantallaNuevoUsuario"></activity>
         <activity android:name="fernando.court_hire.PantallaPistas"></activity>
         
-        
-        
-        
-        
+ 
     </application>
 
 </manifest>

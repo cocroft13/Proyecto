@@ -1,93 +1,53 @@
 package fernando.court_hire;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class PantallaPistas extends Activity implements ActionBar.OnNavigationListener {
+		
+	private ListView lista;
+	private Button botonConsulta;
 	
-	Spinner spinnerDias;
-	ListView list;
-	TextView nombrePista;
-	TextView reservado;
-	Button botonConsulta;
-	ArrayList<HashMap<String, String>> datosLista ;
-	
-	
-	
+	private ProgressDialog pDialog; 
+	private static final String URL = "169.254.118.110/consultaPistas.php";			
+
 	boolean flag;
+	private String dia = "";
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pantalla_pistas);
 		
-		
+		lista = (ListView)findViewById(R.id.miLista);
+		botonConsulta = (Button)findViewById(R.id.botonObtenerDatos);
+				
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		
-				
+						
 		SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.lista_dias, 
-																 android.R.layout.simple_spinner_dropdown_item);
-		
+																 android.R.layout.simple_spinner_dropdown_item);	
 		actionBar.setListNavigationCallbacks(adapter, this);
 	
-		datosLista = new ArrayList<HashMap<String,String>>();
-		botonConsulta = (Button)findViewById(R.id.nombrePista);
-		list = (ListView)findViewById(R.id.miLista);
+		
+		
+		
+		
+		
+		
+		
 		
 	}
-
-
 	
-	//METODO PARA MOSTRAR LA BARRA DE PROGRESO MIENTRAS SE CONSULTAN LOS DATOS
 	
-	/*private class JSONParse extends AsyncTask<String, String, JSONObject>{
-		private ProgressDialog pDialog;
-
-		
-		
-		protected void  onPreExecute(){
-			super.onPreExecute();
-				nombrePista = (TextView)findViewById(R.id.nombrePista);
-				reservado = (TextView)findViewById(R.id.libreSiNo);
-				
-				pDialog = new ProgressDialog(PantallaPistas.this);
-				pDialog.setMessage("Oteniendo datos");
-				pDialog.setIndeterminate(false);
-				pDialog.setCancelable(true);
-				pDialog.show();
-				
-		}
-
-
-
-		@Override
-		protected JSONObject doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	}*/
-	
-
-	
-
 	@Override
 	public boolean onNavigationItemSelected(int position, long itemId) {
 		
@@ -97,19 +57,33 @@ public class PantallaPistas extends Activity implements ActionBar.OnNavigationLi
 			
 			switch (position) {
 			case 0:
-				Toast.makeText(getApplicationContext(), "Hola", Toast.LENGTH_SHORT).show();
-				
+						
 				break;
-
-			default:
+			case 1:			
+				dia = "lunes";
+				Toast.makeText(getApplicationContext(),"Lunes", Toast.LENGTH_SHORT).show();
 				break;
-			}			
+			case 2:
+				dia = "martes";
+				Toast.makeText(getApplicationContext(),"Martes", Toast.LENGTH_SHORT).show();			
+				break;
+			case 3:
+				dia = "miercoles";
+				Toast.makeText(getApplicationContext(),"Miercoles", Toast.LENGTH_SHORT).show();
+				break;				
+			case 4:
+				dia = "jueves";
+				Toast.makeText(getApplicationContext(),"Jueves", Toast.LENGTH_SHORT).show();
+				break;
+			case 5:
+				dia = "viernes";
+				Toast.makeText(getApplicationContext(),"Viernes", Toast.LENGTH_SHORT).show();
+			case 6:
+				dia = "sabado";
+				Toast.makeText(getApplicationContext(),"Sábado", Toast.LENGTH_SHORT).show();
 			
-		}
-		
-		
+			}						
+		}	
 		return false;
-	}
-
-		
-	}
+	}	
+}

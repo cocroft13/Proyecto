@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 	private Button validar;
 	private Button registrarse;
 	private LoginUser loginUser;	
-	private Thread thr1;
+	
 	
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
@@ -43,15 +43,13 @@ public class MainActivity extends Activity {
 		campoPassword = (EditText)findViewById(R.id.campoPassword);
 		validar = (Button)findViewById(R.id.botonInicioSesion);
 		registrarse = (Button)findViewById(R.id.botonRegistrarse);
-		pDialog = new ProgressDialog(getApplicationContext());
+		pDialog = new ProgressDialog(getApplicationContext());		
 			
 		validar.setOnClickListener(new View.OnClickListener() {
-	
-			
+				
 			@Override
 			public void onClick(View v) {
-											
-										
+																					
 				final String userName = campoUser.getText().toString();
 				final String userPass = campoPassword.getText().toString();
 							
@@ -61,11 +59,10 @@ public class MainActivity extends Activity {
 				
 				} else {
 															
-					try {	
-								
-						startDialog(userName, userPass);
-						boolean valido = loginUser.validOrNot();
-				
+					try {
+											
+						loginUser.postData(userName, userPass);
+						boolean valido = loginUser.validOrNot();									
 												
 						//SI ES CORRECTO, IREMOS A LA PANTALLA DONDE VER LAS PISTAS LIBRES, OCUPADAS, ETC
 						if(valido) {
@@ -83,12 +80,10 @@ public class MainActivity extends Activity {
 						} catch (Exception e) {
 							e.printStackTrace();
 					}													
-			    }
-			
+			    }			
 			}
 		});		
-											
-				
+														
 		registrarse.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -98,14 +93,14 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 						
 			}
-		});		
-				
+		});	                 				
 	}
-		
-	private void startDialog(final String userName,final String pass){
+
+			
+	/*private void startDialog(final String userName,final String pass){
 					
 		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		pDialog.setCancelable(false);
+		pDialog.setCancelable(true);
 		pDialog = ProgressDialog.show(MainActivity.this, "Login de usuario", "Verificando...");
 		
 		
@@ -115,21 +110,22 @@ public class MainActivity extends Activity {
 			@Override
 			public void run() {
 							
-				loginUser.postData(userName,pass);				
-				handler.sendEmptyMessage(0);
+				loginUser.postData(userName,pass);
 				pDialog.dismiss();
+				handler.sendEmptyMessage(0);
+				
 			}
 		}).start();
 		
 	
-	}
+	}*/
 	
-	Handler handler = new Handler() {  
+	/*Handler handler = new Handler() {  
 	    @Override  
 	    public void handleMessage(Message msg) {
 	         
 	    
 	    }  
-	};	
+	};	*/
 		
 }

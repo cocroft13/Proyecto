@@ -15,17 +15,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-
 public class LoginUser {
 	
-	ProgressDialog pDialog;
 	private String URL;
 	private Boolean valido = false;
-	
-	
+		
 	public void postData(String user,String pass) {
+				
 		URL = "http://169.254.118.110/login2.php";
 		String code = "1";
 		
@@ -33,8 +29,7 @@ public class LoginUser {
 		HttpPost httpPost = new HttpPost(URL);
 		
 		JSONObject jsonObj = new JSONObject();
-		
-				
+						
 		try {
 	
 			//Datos Json
@@ -86,7 +81,6 @@ public class LoginUser {
 			e.printStackTrace();
 		}
 		
-		
 	}
 	
 	
@@ -94,5 +88,5 @@ public class LoginUser {
 		
 		return valido;			
 	}
-			
+		
 }

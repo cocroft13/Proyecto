@@ -30,11 +30,21 @@
 
 -Documentación sobre Threads y AsyncTask y realización de pruebas en ejercicios aparte.
 
-—————————————————————
+—————————————————
 (3/04/2014)
 (2:30h)
 
 - Documentación e implementación de threads para el proyecto.
 
+————————————————
+(7/04/2014)
+(5h aprox.)
 
+- Documentación sobre clase JSON para traer la información de las pistas disponibles a un ListView Android.
+
+-Desarrollo de tabla mysql donde se recogen las pistas en dos distintos horarios para cada día.
+
+-Realización de pruebas sobre estos aspectos.
+
+_ Incluida el fichero checkCourts, para comunicar con PHP.
 
