@@ -49,9 +49,16 @@
 _ Incluida el fichero checkCourts, para comunicar con PHP.
 
 
+(10/04/2014)
+(5h)
 
+-Documentación sobre los CalendarView y Pickers en Android.
 
+-Documentación sobre tratado de arrays Json para ser pareados a un arrayList.
 
+-Desarrollo de la tabla Pista y la tabla Reserva con Mysql.
+
+-Realización del envío de la fecha a la base de datos.
 
 
 
