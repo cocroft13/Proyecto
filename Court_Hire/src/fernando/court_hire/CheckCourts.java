@@ -27,10 +27,10 @@ public class CheckCourts {
 	HttpEntity httpEntity;
 	JSONObject jsonObj;
 	JSONArray jsonArray;
-	StringBuilder sb;
 	
 	
-	public StringBuilder obtenerPistas(String dia) {
+	
+	public String obtenerPistas(String dia) {
 		
 		String line = "";
 				
@@ -61,26 +61,9 @@ public class CheckCourts {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"), 8);
 			
 			line = reader.readLine();
-						
-			
-			
+									
 			//ESTA PARTE ES LA DE RELLENAR UN ARRAY CON TODAS LAS PISTAS
-			
-			jsonArray = new JSONArray();
-			JSONObject jsonObject = new JSONObject().getJSONObject(line);
-			
-			jsonArray.put(jsonObject);
-			
-			
-			
-			
-			/*sb = new StringBuilder();
-			
-			while((line = reader.readLine()) != null){
-				sb.append(line + "\n");
-								
-			}*/
-					
+										
 			is.close();
 			reader.close();
 			
@@ -91,7 +74,7 @@ public class CheckCourts {
 		}
 		
 		
-		return sb;
+		return line;
 				
 	}	
 }

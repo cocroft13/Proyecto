@@ -3,6 +3,7 @@ package fernando.court_hire;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView.OnDateChangeListener;
@@ -18,6 +19,9 @@ public class CalendarView extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.calendar_view);
+		
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().detectAll().build();
+		StrictMode.setThreadPolicy(policy);
 		
 		botonAceptarFecha = (Button)findViewById(R.id.botonVolverPantallaPistas);
 		

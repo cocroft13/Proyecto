@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 					try {
 											
 						loginUser.postData(userName, userPass);
-						boolean valido = loginUser.validOrNot();								
+						boolean valido = loginUser.validOrNot();							
 												
 						//SI ES CORRECTO, IREMOS A LA PANTALLA DONDE VER LAS PISTAS LIBRES, OCUPADAS, ETC
 						if(valido) {
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 			    }			
 			}
 		});		
-														
+													
 		registrarse.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -91,9 +91,7 @@ public class MainActivity extends Activity {
 						
 			}
 		});	                 				
-	}
-		
-}
-		
+	}		
+}	
 		
 

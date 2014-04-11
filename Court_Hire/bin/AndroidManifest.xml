@@ -13,7 +13,7 @@
         android:permissionGroup="android.permission-group.NETWORK"
         android:protectionLevel="normal" >
     </permission>
-
+    
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
 
@@ -40,6 +40,8 @@
         
         <activity 
             android:name="fernando.court_hire.CalendarView"></activity>
+        
+        <activity android:name="fernando.court_hire.SingleCourtActivity"></activity>
     </application>
 
 </manifest>
