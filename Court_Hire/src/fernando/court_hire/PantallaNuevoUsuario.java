@@ -169,4 +169,3 @@ public class PantallaNuevoUsuario extends Activity {
 	};
 		
 }
-

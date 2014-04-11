@@ -22,7 +22,7 @@ public class LoginUser {
 		
 	public void postData(String user,String pass) {
 				
-		URL = "http://169.254.118.110/login2.php";
+		URL = "http://169.254.200.70/login2.php";
 		String code = "1";
 		
 		HttpClient httpClient = new DefaultHttpClient();

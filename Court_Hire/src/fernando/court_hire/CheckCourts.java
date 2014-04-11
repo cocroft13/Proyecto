@@ -3,7 +3,9 @@ package fernando.court_hire;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,9 +15,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.util.JsonReader;
+import android.util.Log;
 
-public class checkCourts {
+public class CheckCourts {
 	
 	private String URL;
 	
@@ -25,13 +27,15 @@ public class checkCourts {
 	HttpEntity httpEntity;
 	JSONObject jsonObj;
 	JSONArray jsonArray;
+	StringBuilder sb;
 	
 	
-	public ArrayList<String> obtenerPistas(String dia) {
+	public StringBuilder obtenerPistas(String dia) {
 		
-		ArrayList<String> miArrayList = new ArrayList<String>();
+		String line = "";
+				
 		
-		URL = "http://169.254.118.110/consultarPistas.php";
+		URL = "http://169.254.200.70/consultarPistas.php";
 		
 		httpClient = new DefaultHttpClient();
 		httpPost = new HttpPost(URL);
@@ -39,7 +43,7 @@ public class checkCourts {
 		
 		try {
 						
-			jsonObj.put("dia", dia);
+			jsonObj.put("fecha", dia);
 			jsonArray = new JSONArray();
 			jsonArray.put(jsonObj);
 						
@@ -56,29 +60,38 @@ public class checkCourts {
 			//OBTENEMOS LOS DATOS DEL FICHERO PHP
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"), 8);
 			
+			line = reader.readLine();
+						
 			
 			
-		
+			//ESTA PARTE ES LA DE RELLENAR UN ARRAY CON TODAS LAS PISTAS
+			
+			jsonArray = new JSONArray();
+			JSONObject jsonObject = new JSONObject().getJSONObject(line);
+			
+			jsonArray.put(jsonObject);
 			
 			
 			
 			
-
+			/*sb = new StringBuilder();
 			
+			while((line = reader.readLine()) != null){
+				sb.append(line + "\n");
+								
+			}*/
+					
+			is.close();
+			reader.close();
+			
+			//AHORA TENEMOS QUE CREAR UN ARRAYLIST A PARTIR DEL JSON QUE LLEGA PARA CONSTRUIR EL LISTVIEW
 			
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		
-		return null;
-		
-		
-		
-		
-		
-		
-		
-	}
-	
+		return sb;
+				
+	}	
 }

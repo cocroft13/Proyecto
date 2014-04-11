@@ -4,86 +4,81 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
-public class PantallaPistas extends Activity implements ActionBar.OnNavigationListener {
+public class PantallaPistas extends Activity  {
 		
-	private ListView lista;
-	private Button botonConsulta;
+	private Button botonVerJson;
+	private CheckCourts checkCourts;
 	
 	private ProgressDialog pDialog; 
-	private static final String URL = "169.254.118.110/consultaPistas.php";			
+	private static final String URL = "169.254.200.70/consultaPistas.php";			
 
 	boolean flag;
-	private String dia = "";
+	private String fecha;
+	private StringBuilder pistasLibres;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pantalla_pistas);
 		
-		lista = (ListView)findViewById(R.id.miLista);
-		botonConsulta = (Button)findViewById(R.id.botonObtenerDatos);
+		try {
+			
+			Bundle bundle = getIntent().getExtras();
+			fecha = bundle.getString("fecha");
+			
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		
+		
+		checkCourts = new CheckCourts();		
+		pistasLibres = checkCourts.obtenerPistas(fecha);
+		botonVerJson = (Button)findViewById(R.id.botonMostrarJson);
+					
+		botonVerJson.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				
-		ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+				Toast.makeText(getApplicationContext(), pistasLibres, Toast.LENGTH_SHORT).show();
+				
+			}
+		});
 						
-		SpinnerAdapter adapter = ArrayAdapter.createFromResource(this, R.array.lista_dias, 
-																 android.R.layout.simple_spinner_dropdown_item);	
-		actionBar.setListNavigationCallbacks(adapter, this);
-	
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	
-	@Override
-	public boolean onNavigationItemSelected(int position, long itemId) {
+	public boolean onCreateOptionsMenu(Menu menu){
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.activity_main_action, menu);
 		
-		if(flag){
-			flag = false;
-		} else {
-			
-			switch (position) {
-			case 0:
-						
-				break;
-			case 1:			
-				dia = "lunes";
-				Toast.makeText(getApplicationContext(),"Lunes", Toast.LENGTH_SHORT).show();
-				break;
-			case 2:
-				dia = "martes";
-				Toast.makeText(getApplicationContext(),"Martes", Toast.LENGTH_SHORT).show();			
-				break;
-			case 3:
-				dia = "miercoles";
-				Toast.makeText(getApplicationContext(),"Miercoles", Toast.LENGTH_SHORT).show();
-				break;				
-			case 4:
-				dia = "jueves";
-				Toast.makeText(getApplicationContext(),"Jueves", Toast.LENGTH_SHORT).show();
-				break;
-			case 5:
-				dia = "viernes";
-				Toast.makeText(getApplicationContext(),"Viernes", Toast.LENGTH_SHORT).show();
-			case 6:
-				dia = "sabado";
-				Toast.makeText(getApplicationContext(),"Sábado", Toast.LENGTH_SHORT).show();
-			
-			}						
-		}	
-		return false;
-	}	
+		return super.onCreateOptionsMenu(menu);		
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item){
+		
+		switch (item.getItemId()){
+			case R.id.action_search:
+				Toast.makeText(getApplicationContext(), fecha, Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(PantallaPistas.this,CalendarView.class);
+				startActivity(intent);
+				finish();
+				return true;
+									
+		default:
+			return super.onOptionsItemSelected(item);
+		
+		
+		}		
+	}		
 }

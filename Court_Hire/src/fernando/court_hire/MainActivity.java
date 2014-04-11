@@ -1,32 +1,29 @@
 package fernando.court_hire;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.StrictMode;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.os.Build;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
-		
+	
 	private ProgressDialog pDialog;
 	private EditText campoUser;
 	private EditText campoPassword;
 	private Button validar;
 	private Button registrarse;
-	private LoginUser loginUser;	
-	
-	
+	private LoginUser loginUser;
+
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
 	@Override
@@ -62,13 +59,13 @@ public class MainActivity extends Activity {
 					try {
 											
 						loginUser.postData(userName, userPass);
-						boolean valido = loginUser.validOrNot();									
+						boolean valido = loginUser.validOrNot();								
 												
 						//SI ES CORRECTO, IREMOS A LA PANTALLA DONDE VER LAS PISTAS LIBRES, OCUPADAS, ETC
 						if(valido) {
 							campoUser.setText("");
 							campoPassword.setText("");
-							Intent intent = new Intent(MainActivity.this,PantallaPistas.class);
+							Intent intent = new Intent(MainActivity.this,CalendarView.class);
 							startActivity(intent);							
 							
 							
@@ -95,37 +92,8 @@ public class MainActivity extends Activity {
 			}
 		});	                 				
 	}
-
-			
-	/*private void startDialog(final String userName,final String pass){
-					
-		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		pDialog.setCancelable(true);
-		pDialog = ProgressDialog.show(MainActivity.this, "Login de usuario", "Verificando...");
-		
-		
-		//Lanzamos un nuevo hilo para el trabajo pesado.		
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-							
-				loginUser.postData(userName,pass);
-				pDialog.dismiss();
-				handler.sendEmptyMessage(0);
-				
-			}
-		}).start();
-		
-	
-	}*/
-	
-	/*Handler handler = new Handler() {  
-	    @Override  
-	    public void handleMessage(Message msg) {
-	         
-	    
-	    }  
-	};	*/
 		
 }
+		
+		
+

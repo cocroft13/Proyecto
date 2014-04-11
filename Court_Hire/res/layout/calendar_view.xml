@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="fernando.court_hire.CalendarView">
+    
+    <TextView 
+        android:id="@+id/lblCalendario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lblCalendario"
+        android:gravity="center"
+        android:textSize="17sp"/>
+    
+    <CalendarView 
+        android:id="@+id/calendarioReservas"
+        android:layout_width="match_parent"	
+        android:layout_height="300dp"
+        android:layout_below="@id/lblCalendario"
+        android:layout_marginTop="20dp"/>
+    
+    
+   	<Button 
+   	    android:id="@+id/botonVolverPantallaPistas"
+   	    android:layout_width="match_parent"
+   	    android:layout_height="wrap_content"
+   	    android:layout_marginTop="15dp"
+   	    android:layout_below="@id/calendarioReservas"
+   	    android:text="@string/botonCalendario"/>
+    
+    
+</RelativeLayout>

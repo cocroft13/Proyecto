@@ -37,16 +37,6 @@
     <string name="action_help"> Ayuda </string>
     <string name="action_check_updates"> Actualizaciones </string>
 
-    <string-array name="lista_dias">
-        <item> -Dias-</item>
-        <item> Lunes </item>
-        <item> Martes </item>
-        <item> Miércoles </item>
-        <item> Jueves </item>
-        <item> Viernes </item>
-        <item> Sábado </item>
-        
-    </string-array>
 
     <string name="title_activity_pantalla_principal">PantallaPrincipal</string>
     <string name="refreshAction"> Recargar </string>
@@ -54,8 +44,12 @@
 
     <!-- Fin Pantalla Principal -->
 
-    <string name="title_activity_pantalla_pistas">PantallaPistas</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_pantalla_nuevo_usuario">PantallaNuevoUsuario</string>
+    <!-- Pantalla Calendario -->
+    
+    <string name="lblCalendario"> Seleccione el día para la reserva </string>
+    <string name="botonCalendario"> Aceptar</string>
+    
+    
+    
 
 </resources>
