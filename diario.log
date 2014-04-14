@@ -62,8 +62,13 @@ _ Incluida el fichero checkCourts, para comunicar con PHP.
 
 
 
+(14/04/2014)
+(5h)
 
-
+-Documentación sobre el uso de variables de sesión para la aplicación, utilizando SharedPreferences.
+-Desarrollo de la interfaz gráfica de la pantalla que finalmente confirma el alquiler.
+-Reparación de código repetido innecesariamente.
+-Nuevas clases para creación de AlertDialogs.
 
 
 

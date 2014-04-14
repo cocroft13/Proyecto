@@ -50,6 +50,12 @@
     <string name="botonCalendario"> Aceptar</string>
     
     
+    <!-- Fin Pantalla Calendario -->
+    
+    <!-- Pantalla Pista Seleccionada -->
+    <string name="lblPistaElegida"> Pista seleccionada </string>
+    <string name="botonConfirmarPista"> Confirmar pista </string>
+    
     
 
 </resources>

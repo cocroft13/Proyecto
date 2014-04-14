@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView.FindListener;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
@@ -39,6 +40,8 @@ public class PantallaPistas extends ListActivity {
 	private ProgressDialog pDialog; 			
 	boolean flag;
 	private String fecha;
+	private ListAdapter adapter;
+	private ListView lv;
 	
 	//NOMBRES DE NODOS JSON
 	private static final String TAG_PISTAS = "Pistas";
@@ -47,12 +50,10 @@ public class PantallaPistas extends ListActivity {
 	private static final String TAG_HORARIO = "horario_pista";
 	
 	JSONArray courts = null;
-	
-	
+		
 	//HASMAP FOR LISTVIEW
 	ArrayList<HashMap<String, String>> courtList;
-	
-	
+		
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pantalla_pistas);
@@ -63,7 +64,7 @@ public class PantallaPistas extends ListActivity {
 		StrictMode.setThreadPolicy(policy);
 			
 		courtList = new ArrayList<HashMap<String, String>>();
-		ListView lv = getListView();
+		lv = getListView();
 					
 		try {
 			
@@ -87,10 +88,11 @@ public class PantallaPistas extends ListActivity {
 				String horario = ((TextView) view.findViewById(R.id.horarioPista)).getText().toString();
 				
 				//STARTING SINGLE CONTACT ACTIVITY
-				Intent in = new Intent(getApplicationContext(),SingleCourtActivity.class);
+				Intent in = new Intent(getApplicationContext(),PantallaPistaSeleccionada.class);
 				
 				in.putExtra(TAG_NAME, name);
-				in.putExtra(TAG_HORARIO, horario);				
+				in.putExtra(TAG_HORARIO, horario);
+				in.putExtra("TAG_FECHA", fecha);
 				startActivity(in);			
 				
 			}
@@ -104,10 +106,10 @@ public class PantallaPistas extends ListActivity {
 	
 		protected void onPreExecute(){
 			super.onPreExecute();
-			//SHOWING PROGRESS DIALOG
 			
+			//SHOWING PROGRESS DIALOG			
 			pDialog = new ProgressDialog(PantallaPistas.this);
-			pDialog.setMessage("Please wait...");
+			pDialog.setMessage("Consultando...");
             pDialog.setCancelable(false);
             pDialog.show();
 	
@@ -118,9 +120,7 @@ public class PantallaPistas extends ListActivity {
 			
 			CheckCourts checkCourts = new CheckCourts();
 			
-			String pistasLibres = checkCourts.obtenerPistas(fecha);
-			
-			Log.d("Response: ","> " + pistasLibres);
+			String pistasLibres = checkCourts.obtenerPistas(fecha);		
 			
 			if(pistasLibres != null){
 				
@@ -135,8 +135,7 @@ public class PantallaPistas extends ListActivity {
 					for (int i=0; i < courts.length(); i++){
 						
 						JSONObject c = courts.getJSONObject(i);
-						
-						//String id_pista = c.getString(TAG_ID);
+												
 						String nombre_pista = c.getString(TAG_NAME);
 						String horario_pista = c.getString(TAG_HORARIO);
 						
@@ -151,9 +150,9 @@ public class PantallaPistas extends ListActivity {
 						court.put("FECHA", fecha);
 											
 						//ADDING COURTS TO COURTLIST
-						courtList.add(court);
-						
-					}									
+						courtList.add(court);					
+					}
+					
 				} catch (JSONException e){
 					e.printStackTrace();
 				}
@@ -164,8 +163,7 @@ public class PantallaPistas extends ListActivity {
 			}				
 			return null;
 		}
-		
-		
+				
 		protected void onPostExecute(Void result){
 			super.onPostExecute(result);
 			
@@ -175,12 +173,11 @@ public class PantallaPistas extends ListActivity {
 				pDialog.dismiss();
 			}
 			
-			ListAdapter adapter = new SimpleAdapter(PantallaPistas.this, courtList, R.layout.list_item, 
+			adapter = new SimpleAdapter(PantallaPistas.this, courtList, R.layout.list_item, 
 													new String[]{ TAG_NAME,TAG_HORARIO,fecha}, new int[] 
 															{R.id.nombrePista,R.id.horarioPista,R.id.fechaPista});
 			
-			setListAdapter(adapter);
-					
+			setListAdapter(adapter);				
 		}		
 	}
 	
@@ -190,25 +187,25 @@ public class PantallaPistas extends ListActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.activity_main_action, menu);
 		
-		return super.onCreateOptionsMenu(menu);		
+		return super.onCreateOptionsMenu(menu);	
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item){
 		
 		switch (item.getItemId()){
 			case R.id.action_search:
-				//Toast.makeText(getApplicationContext(), fecha, Toast.LENGTH_LONG).show();
+				
 				Intent intent = new Intent(PantallaPistas.this,CalendarView.class);
 				startActivity(intent);
 				finish();
 				return true;
 			case R.id.action_refresh:
+				courtList.clear();							
 				new GetContacts().execute();
 									
 		default:
 			return super.onOptionsItemSelected(item);
-		
-		
+					
 		}		
 	}		
 }

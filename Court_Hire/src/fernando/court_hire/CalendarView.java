@@ -2,6 +2,8 @@ package fernando.court_hire;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -15,14 +17,13 @@ public class CalendarView extends Activity{
 	android.widget.CalendarView calendar;
 	String curDate;
 	
-	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.calendar_view);
 		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().detectAll().build();
 		StrictMode.setThreadPolicy(policy);
-		
+			
 		botonAceptarFecha = (Button)findViewById(R.id.botonVolverPantallaPistas);
 		
 		calendar = (android.widget.CalendarView)findViewById(R.id.calendarioReservas);
@@ -54,7 +55,7 @@ public class CalendarView extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				
+					
 				Bundle bundle = new Bundle();
 				bundle.putString("fecha", curDate);
 				

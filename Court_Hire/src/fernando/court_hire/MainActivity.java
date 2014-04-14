@@ -12,6 +12,8 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 @SuppressLint("NewApi")
@@ -23,6 +25,7 @@ public class MainActivity extends Activity {
 	private Button validar;
 	private Button registrarse;
 	private LoginUser loginUser;
+	SharedPreferences pref;
 
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
@@ -32,7 +35,10 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build();
-		StrictMode.setThreadPolicy(policy);		
+		StrictMode.setThreadPolicy(policy);
+		
+		pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+		final Editor editor = pref.edit();
 		
 		loginUser = new LoginUser();
 		
@@ -41,6 +47,7 @@ public class MainActivity extends Activity {
 		validar = (Button)findViewById(R.id.botonInicioSesion);
 		registrarse = (Button)findViewById(R.id.botonRegistrarse);
 		pDialog = new ProgressDialog(getApplicationContext());		
+				
 			
 		validar.setOnClickListener(new View.OnClickListener() {
 				
@@ -57,7 +64,9 @@ public class MainActivity extends Activity {
 				} else {
 															
 					try {
-											
+									
+						editor.putString("key_name_user", userName);
+						editor.commit();
 						loginUser.postData(userName, userPass);
 						boolean valido = loginUser.validOrNot();							
 												
@@ -80,7 +89,7 @@ public class MainActivity extends Activity {
 			    }			
 			}
 		});		
-													
+															
 		registrarse.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
