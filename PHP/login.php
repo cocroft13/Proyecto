@@ -26,14 +26,13 @@
         $sqlSelect = "SELECT * FROM users WHERE  dni='$dni'";
         $resSelect = mysql_query($sqlSelect,$con);
 
-
         //Si hay lineas afectadas es que el usuario existe, devolvemos 0.
         if (mysql_affected_rows($con)) {
             
             $response = 0;
             echo json_encode($response);
 
-        //Si no existe, el valor será 1, y si los datos son correctos el usuario será registrado.        
+        //Si no existe el usuario, el valor será 1, y si los datos son correctos el usuario será registrado.        
         } else {
 
     	$sqlInsert = "INSERT INTO users (dni,nombre,email,password) VALUES ('$dni', '$name', '$email', '$password')";

@@ -15,8 +15,6 @@
 		$fecha = $data-> fecha;
 	}
 
-	
-
 	$con = mysql_connect(DB_HOST,DB_USER,DB_PASSWORD);
 	if(!$con || !mysql_select_db(DB_NAME,$con)){
 
@@ -24,8 +22,10 @@
 
 	} else {
 
-
-		$sqlSelect = "SELECT nombre_pista,horario_pista FROM pista WHERE id_pista NOT IN(SELECT id_pista FROM reserva WHERE fecha='$fecha')";
+		$sqlSelect = " SELECT id_pista,nombre_pista,horario FROM pista WHERE NOT EXISTS (
+																			SELECT id_pista,horario FROM reserva WHERE 
+																			pista.id_pista = reserva.id_pista AND pista.horario = reserva.horario 
+																			AND fecha='$fecha') ";
 		$resSelect = mysql_query($sqlSelect,$con);
 
 		if (mysql_affected_rows($con)){
@@ -34,16 +34,12 @@
 
 				$pista = array();
 
-				//$pista['id_pista'] = $res['id_pista'];
+				$pista['id_pista'] = $res['id_pista'];
 				$pista['nombre_pista'] = $res['nombre_pista'];
-				$pista['horario_pista'] = $res['horario_pista'];
+				$pista['horario'] = $res['horario'];
 				
-
-
 				array_push($response['Pistas'], $pista);
-
-				//$response = $res;
-				
+			
 			}
 			echo json_encode($response);
 			

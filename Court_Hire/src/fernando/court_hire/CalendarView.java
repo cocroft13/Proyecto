@@ -2,8 +2,6 @@ package fernando.court_hire;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -14,9 +12,9 @@ import android.widget.Toast;
 public class CalendarView extends Activity{
 	
 	Button botonAceptarFecha;
-	android.widget.CalendarView calendar;
+	android.widget.CalendarView calendarView;
 	String curDate;
-	
+		
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.calendar_view);
@@ -25,12 +23,13 @@ public class CalendarView extends Activity{
 		StrictMode.setThreadPolicy(policy);
 			
 		botonAceptarFecha = (Button)findViewById(R.id.botonVolverPantallaPistas);
-		
-		calendar = (android.widget.CalendarView)findViewById(R.id.calendarioReservas);
-
-		calendar.setOnDateChangeListener(new OnDateChangeListener() {
 			
+		calendarView = (android.widget.CalendarView)findViewById(R.id.calendarioReservas);
+		calendarView.setMinDate(calendarView.getDate());
 		
+					
+		calendarView.setOnDateChangeListener(new OnDateChangeListener() {
+				
 			@Override
 			public void onSelectedDayChange(android.widget.CalendarView view,
 					int year, int month, int dayOfMonth) {

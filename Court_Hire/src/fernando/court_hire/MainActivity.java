@@ -19,8 +19,9 @@ import android.content.SharedPreferences.Editor;
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
 	
+	@SuppressWarnings("unused")
 	private ProgressDialog pDialog;
-	private EditText campoUser;
+	private EditText campoDni;
 	private EditText campoPassword;
 	private Button validar;
 	private Button registrarse;
@@ -42,7 +43,7 @@ public class MainActivity extends Activity {
 		
 		loginUser = new LoginUser();
 		
-		campoUser = (EditText)findViewById(R.id.campoUser);
+		campoDni = (EditText)findViewById(R.id.campoUser);
 		campoPassword = (EditText)findViewById(R.id.campoPassword);
 		validar = (Button)findViewById(R.id.botonInicioSesion);
 		registrarse = (Button)findViewById(R.id.botonRegistrarse);
@@ -54,10 +55,10 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 																					
-				final String userName = campoUser.getText().toString();
+				final String userDni = campoDni.getText().toString();
 				final String userPass = campoPassword.getText().toString();
 							
-				if(userName.equalsIgnoreCase("") || userPass.equalsIgnoreCase("")){
+				if(userDni.equalsIgnoreCase("") || userPass.equalsIgnoreCase("")){
 					
 					Toast.makeText(getApplicationContext(), "Alguno de los campos están vacíos", Toast.LENGTH_SHORT).show();			
 				
@@ -65,14 +66,14 @@ public class MainActivity extends Activity {
 															
 					try {
 									
-						editor.putString("key_name_user", userName);
+						editor.putString("key_name_user", userDni);
 						editor.commit();
-						loginUser.postData(userName, userPass);
+						loginUser.postData(userDni, userPass);
 						boolean valido = loginUser.validOrNot();							
 												
 						//SI ES CORRECTO, IREMOS A LA PANTALLA DONDE VER LAS PISTAS LIBRES, OCUPADAS, ETC
 						if(valido) {
-							campoUser.setText("");
+							campoDni.setText("");
 							campoPassword.setText("");
 							Intent intent = new Intent(MainActivity.this,CalendarView.class);
 							startActivity(intent);							

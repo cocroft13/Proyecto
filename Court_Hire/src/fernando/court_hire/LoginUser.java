@@ -21,8 +21,8 @@ public class LoginUser {
 	private Boolean valido = false;
 		
 	public void postData(String user,String pass) {
-				
-		URL = "http://169.254.200.70/login2.php";
+		
+		URL = "http://169.254.141.40/login2.php";
 		String code = "1";
 		
 		HttpClient httpClient = new DefaultHttpClient();
@@ -33,7 +33,7 @@ public class LoginUser {
 		try {
 	
 			//Datos Json
-			jsonObj.put("Nombre",user);
+			jsonObj.put("Dni",user);
 			jsonObj.put("Password", pass);
 			
 						

@@ -22,7 +22,7 @@ public class RegisterUser {
 		
 	public boolean postData(String nombre,String dni,String email,String password,String rePassword){
 		
-		URL = "http://169.254.200.70/login.php";
+		URL = "http://169.254.141.40/login.php";
 		String code = "1";
 		
 		HttpClient httpClient = new DefaultHttpClient();

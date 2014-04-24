@@ -5,11 +5,11 @@
     $response = array();
 
   	$json = $_SERVER['HTTP_JSON'];
-    
+
     $data = json_decode($json);
       
     
-    $name = $data-> Nombre;
+    $dni = $data-> Dni;
     $password = $data-> Password;
 
     $con = mysql_connect(DB_HOST,DB_USER,DB_PASSWORD);
@@ -20,19 +20,17 @@
     } else {
 
 
-        $sqlSelect = "SELECT * FROM users WHERE nombre='$name' AND password='$password'";
+        $sqlSelect = "SELECT * FROM users WHERE dni='$dni' AND password='$password'";
         $resSelect = mysql_query($sqlSelect,$con);
 
 
         //Si hay lineas afectadas es que el usuario existe y pasa a la pantalla siguiente, devolvemos 1.
         if (mysql_affected_rows($con)) {
             
-
             $response = 1;
             echo json_encode($response);
-
-
-        //Si no existe, el valor será 0, sugiriendo al usuario que cree una cuenta.       
+            
+         //Si no existe, el valor será 0, sugiriendo al usuario que cree una cuenta.       
         } else {
 		  		
         $response = 0;    	

@@ -27,15 +27,12 @@ public class CheckCourts {
 	HttpEntity httpEntity;
 	JSONObject jsonObj;
 	JSONArray jsonArray;
-	
-	
-	
+		
 	public String obtenerPistas(String dia) {
 		
 		String line = "";
-				
-		
-		URL = "http://169.254.200.70/consultarPistas.php";
+						
+		URL = "http://169.254.141.40/consultarPistas.php";
 		
 		httpClient = new DefaultHttpClient();
 		httpPost = new HttpPost(URL);
